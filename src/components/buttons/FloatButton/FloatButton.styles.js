@@ -22,6 +22,12 @@ const mobileStyle = StyleSheet.create({
         shadowOpacity: 0.36,
         shadowRadius: 6.68,
         elevation: 11,
+    },
+    stop:{
+        width:40,
+        height:40,
+        borderRadius:8,
+        backgroundColor:colors.dark_white_container
     }
 });
 

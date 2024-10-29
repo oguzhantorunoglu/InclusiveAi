@@ -3,11 +3,15 @@ import { ScrollView, View, TouchableOpacity, Text, Linking, Image, FlatList, Ref
 
 import { showMessage } from "react-native-flash-message";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Tts from 'react-native-tts'; 
+import Config from "react-native-config";
+import * as GoogleGenerativeAI from "@google/generative-ai";
 
 import IntroScreen from "../IntroScreen";
 import { LoadingAnimation } from '../../../assets/animations';
 import { SoundIcon, ToolsIcon } from '../../../assets/icons';
-import { useLanguage } from '../../hooks';
+import { useLanguage, useVoice } from '../../hooks';
+import { ReadAloud } from '../../utils';
 import { ToolCard } from "../../components/cards";
 import { FloatButton } from '../../components/buttons';
 
@@ -27,10 +31,13 @@ const Data = [
 const HomeScreen = (props) => {
     const [data, setData] = useState({});
     const [isRefresh, setIsRefresh] = useState(false);
+    const [ttsStatus, setTtsStatus] = useState(null);
+    const [activeSpeech, setActiveSpeech] = useState(null);
     const [firstLoad, setFirstLoad] = useState(false);
     const [loading, setLoading] = useState(true);
 
     const [languages] = useLanguage();
+    const [text, isListening, setIsListening] = useVoice();
 
     // Tools Static (NO API)
     const ToolsData = [
@@ -99,13 +106,100 @@ const HomeScreen = (props) => {
     };
 
 
-    // Use Sound
-    const readAloud = (text="") => {
-        // içine gönderilen metni sesli oku
+    // Gemini
+    const askGemini = async (prompt="") => {
+        if(prompt){
+            try{
+                const genAI = new GoogleGenerativeAI.GoogleGenerativeAI(Config.GEMINI_API_KEY);          
+                const model = genAI.getGenerativeModel({
+                    model:"gemini-1.5-flash",                                    
+                    generationConfig: {                                                   
+                        candidateCount:1,               
+                        maxOutputTokens:20,          
+                        temperature:1,
+                        topP:0.95,
+                        topK:64,
+                        responseMimeType:"text/plain"
+                    },
+                });        
+                                              
+                const result = await model.generateContent(prompt);                       
+                return result.response.text();                                       
+            }
+            catch(error){
+                return "";
+            }
+        }
     };
 
-    const VoiceCommand = () => {
-        // sesli komutlar ile yazıları oku veya toolslara tıkla
+
+    // Use Sound
+    const activateSpeech = (text="", speechId=null) => {
+        if(ttsStatus === "start" || ttsStatus === "progress"){
+            Tts.stop();
+        }
+        else{
+            setActiveSpeech(speechId);
+            ReadAloud(text);
+        }
+    }
+
+    const voiceCommand = async (text="") => {
+        let response = "";
+        const commandList = [languages.command_go_settings, languages.command_read_daily_quote, languages.command_go_daily_quote, languages.command_go_all_tools, languages.view_all.toLowerCase(), languages.command_go_my_eyes_is_my_ears, languages.command_go_storyteller, languages.command_go_summariser];
+
+        if(!commandList.includes(text.toLowerCase().trim())){
+            const prompt = "The user made a voice recording and the text returned as a result of the recording is as follows;\n" +
+                            `"${text}"\n` +
+                            "The user wants to give a voice command with this voice recording. The list of voice commands are the elements of the following directory and cannot issue other commands.\n" +
+                            `commandList = [${languages.command_go_settings + ", " + languages.command_read_daily_quote + ", " + languages.command_go_daily_quote + ", " + languages.command_go_all_tools + ", " + languages.view_all.toLowerCase() + ", " + languages.command_go_my_eyes_is_my_ears + ", " + languages.command_go_storyteller + ", " + languages.command_go_summariser}];\n` + 
+                            "The ambient conditions, the device used, or the pronunciation of the person may not be appropriate, or the person may not have said the command exactly the same way. Considering all these, tell me which command in the commandList array the person may have given in the text returned from this audio recording, according to both the structure and the meaning of the text. Send me only the relevant command in the array as output and do not write any other text. If you can't find a similarity or you can't guess it, just write 'empty'.";
+
+            response = await askGemini(prompt);
+        }
+        else{
+            response = text;
+        }
+
+        switch(response.toLowerCase().trim()) {
+            case languages.command_go_settings:
+                activateSpeech(languages.command_go_settings);
+                props.navigation.navigate("SettingsScreen");
+                break;
+            case languages.command_read_daily_quote:
+                activateSpeech((data.text + "{delay}" + data.owner), "quote");
+                break;
+            case languages.command_go_daily_quote:
+                activateSpeech(languages.command_go_daily_quote);
+                Linking.openURL(data.url);
+                break;
+            case languages.command_go_all_tools:
+            case languages.view_all.toLowerCase():
+                activateSpeech(languages.command_go_all_tools);
+                goAllToolsPage();
+                break;
+            case languages.command_go_my_eyes_is_my_ears:
+                activateSpeech(languages.command_go_my_eyes_is_my_ears);
+                props.navigation.navigate("MyEyesScreen");
+                break;
+            case languages.command_go_storyteller:
+                activateSpeech(languages.command_go_storyteller);
+                props.navigation.navigate("StorytellerScreen");
+                break;
+            case languages.command_go_summariser:
+                activateSpeech(languages.command_go_summariser);
+                props.navigation.navigate("SummariserScreen");
+                break;
+            default:
+                activateSpeech(languages.dont_understand_error);
+
+                showMessage({
+                    message:languages.operation_failed,
+                    description:languages.dont_understand_error,
+                    type:"info",
+                    icon:"info", 
+                });  
+        }
     };
 
 
@@ -126,6 +220,23 @@ const HomeScreen = (props) => {
     // useEffects
     useEffect(() => {
         firstLoadControl();
+
+        Tts.addEventListener('tts-start', () => setTtsStatus("start"));       
+        Tts.addEventListener('tts-progress', () => setTtsStatus("progress"));    
+        Tts.addEventListener('tts-finish', () => setTtsStatus("finish"));        
+        Tts.addEventListener('tts-cancel', () => setTtsStatus("cancel"));
+        Tts.addEventListener('tts-pause', () => setTtsStatus("pause"));
+        Tts.addEventListener('tts-resume', () => setTtsStatus("resume"));
+
+        return () => {
+            setTtsStatus(null);
+            Tts.removeEventListener('tts-start'); 
+            Tts.removeEventListener('tts-progress'); 
+            Tts.removeEventListener('tts-finish'); 
+            Tts.removeEventListener('tts-cancel'); 
+            Tts.removeEventListener('tts-pause'); 
+            Tts.removeEventListener('tts-resume'); 
+        };
     }, []);
 
     useEffect(() => {
@@ -136,6 +247,12 @@ const HomeScreen = (props) => {
             navigationShow();
         }
     }, [loading]);
+
+    useEffect(() => {
+        if(isListening && text){
+            voiceCommand(text);
+        }
+    }, [text]);
 
 
     // renderItems
@@ -148,8 +265,10 @@ const HomeScreen = (props) => {
                 description={item.description}
                 image={item.image}
                 theme={item.theme}
+                activeSpeechId={activeSpeech}
+                ttsStatus={ttsStatus}
                 onPress={() => props.navigation.navigate(item.screen)}
-                readAloud={() => readAloud(item.title + " " + item.description)}
+                readAloud={() => activateSpeech((item.title + "{delay}" + item.description), item.id)}
             />
         );
     };
@@ -189,9 +308,9 @@ const HomeScreen = (props) => {
 
                             <TouchableOpacity
                                 style={styles.sound}
-                                onPress={() => readAloud(data.text + " " + data.owner)}
+                                onPress={() => activateSpeech((data.text + "{delay}" + data.owner), "quote")}
                             >
-                                <SoundIcon width={28} height={28} stroke={colors.white_container} strokeWidth={1.5}/>
+                                <SoundIcon width={28} height={28} stroke={(activeSpeech === "quote" && (ttsStatus === "start" || ttsStatus === "progress")) ? "#76DD78" : colors.white_container} strokeWidth={1.5}/>
                             </TouchableOpacity>
                         </TouchableOpacity>
 
@@ -231,7 +350,10 @@ const HomeScreen = (props) => {
                 </ScrollView>
 
 
-                <FloatButton onPress={VoiceCommand}/>
+                <FloatButton 
+                    isListening={isListening}
+                    onPress={() => setIsListening(!isListening)}
+                />
             </>
         );
     }

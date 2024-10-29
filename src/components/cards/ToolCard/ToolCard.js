@@ -8,8 +8,8 @@ import { SoundIcon } from '../../../../assets/icons';
 import styles from "./ToolCard.styles";
 import { colors } from '../../../../config';
 
-const ToolCard = ({style={}, id="", title="-", description="", image="", theme=[colors.second_theme_container, colors.third_theme_container], onPress=() => {}, readAloud=() => {}}) => {
-
+const ToolCard = ({style={}, id="", title="-", description="", image="", theme=[colors.second_theme_container, colors.third_theme_container], activeSpeechId=null, ttsStatus=null, onPress=() => {}, readAloud=() => {}}) => {
+    
     return(
         <TouchableOpacity onPress={onPress}>
             <LinearGradient
@@ -33,7 +33,7 @@ const ToolCard = ({style={}, id="", title="-", description="", image="", theme=[
                     style={styles.sound}
                     onPress={readAloud}
                 >
-                    <SoundIcon width={28} height={28} stroke={colors.white_container} strokeWidth={1.5}/>
+                    <SoundIcon width={28} height={28} stroke={(activeSpeechId === id && (ttsStatus === "start" || ttsStatus === "progress")) ? "#74C476" : colors.white_container} strokeWidth={1.5}/>
                 </TouchableOpacity>
             </LinearGradient>
         </TouchableOpacity>
