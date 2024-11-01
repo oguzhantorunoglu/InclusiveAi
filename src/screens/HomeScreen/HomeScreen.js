@@ -130,6 +130,9 @@ const HomeScreen = (props) => {
                 return "";
             }
         }
+        else{
+            return "";
+        }
     };
 
 
@@ -152,7 +155,7 @@ const HomeScreen = (props) => {
             const prompt = "The user made a voice recording and the text returned as a result of the recording is as follows;\n" +
                             `"${text}"\n` +
                             "The user wants to give a voice command with this voice recording. The list of voice commands are the elements of the following directory and cannot issue other commands.\n" +
-                            `commandList = [${languages.command_go_settings + ", " + languages.command_read_daily_quote + ", " + languages.command_go_daily_quote + ", " + languages.command_go_all_tools + ", " + languages.view_all.toLowerCase() + ", " + languages.command_go_my_eyes_is_my_ears + ", " + languages.command_go_storyteller + ", " + languages.command_go_summariser}];\n` + 
+                            `commandList = ${JSON.stringify(commandList)};\n` + 
                             "The ambient conditions, the device used, or the pronunciation of the person may not be appropriate, or the person may not have said the command exactly the same way. Considering all these, tell me which command in the commandList array the person may have given in the text returned from this audio recording, according to both the structure and the meaning of the text. Send me only the relevant command in the array as output and do not write any other text. If you can't find a similarity or you can't guess it, just write 'empty'.";
 
             response = await askGemini(prompt);
@@ -221,21 +224,21 @@ const HomeScreen = (props) => {
     useEffect(() => {
         firstLoadControl();
 
-        Tts.addEventListener('tts-start', () => setTtsStatus("start"));       
-        Tts.addEventListener('tts-progress', () => setTtsStatus("progress"));    
-        Tts.addEventListener('tts-finish', () => setTtsStatus("finish"));        
-        Tts.addEventListener('tts-cancel', () => setTtsStatus("cancel"));
-        Tts.addEventListener('tts-pause', () => setTtsStatus("pause"));
-        Tts.addEventListener('tts-resume', () => setTtsStatus("resume"));
+        let start = Tts.addEventListener('tts-start', () => setTtsStatus("start"));       
+        let progress = Tts.addEventListener('tts-progress', () => setTtsStatus("progress"));    
+        let finish = Tts.addEventListener('tts-finish', () => setTtsStatus("finish"));        
+        let cancel = Tts.addEventListener('tts-cancel', () => setTtsStatus("cancel"));
+        let pause = Tts.addEventListener('tts-pause', () => setTtsStatus("pause"));
+        let resume = Tts.addEventListener('tts-resume', () => setTtsStatus("resume"));
 
         return () => {
             setTtsStatus(null);
-            Tts.removeEventListener('tts-start'); 
-            Tts.removeEventListener('tts-progress'); 
-            Tts.removeEventListener('tts-finish'); 
-            Tts.removeEventListener('tts-cancel'); 
-            Tts.removeEventListener('tts-pause'); 
-            Tts.removeEventListener('tts-resume'); 
+            start.remove();
+            progress.remove();
+            finish.remove();
+            cancel.remove();
+            pause.remove();
+            resume.remove();
         };
     }, []);
 

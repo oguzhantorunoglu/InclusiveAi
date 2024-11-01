@@ -1,5 +1,5 @@
-import Input from "./Input";
+import ChatInput from "./ChatInput";
 
 export {
-    Input,
+    ChatInput
 };

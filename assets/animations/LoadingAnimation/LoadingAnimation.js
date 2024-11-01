@@ -3,8 +3,6 @@ import { StyleSheet, View, StatusBar, useWindowDimensions } from 'react-native';
 
 import Lottie from 'lottie-react-native'; 
 
-import { colors } from '../../../config';
-
 const LoadingAnimation = () => {
     const { width } = useWindowDimensions();
     const isTablet = (width > 500) ? true : false;

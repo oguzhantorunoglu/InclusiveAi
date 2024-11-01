@@ -1,0 +1,137 @@
+import { StyleSheet, Dimensions } from 'react-native';
+
+import { colors, margins, paddings, gaps, fontsize, fontweight, fontfamily } from "../../../config";
+
+const width = Dimensions.get('window').width;
+
+const mobileStyle = StyleSheet.create({
+    container:{
+        flex:1,
+        backgroundColor:colors.light_theme_container
+    },
+    options_container:{
+        width:"100%",
+        paddingTop:paddings.mid,
+        backgroundColor:colors.theme_container,
+        borderBottomWidth:1,
+        borderColor:colors.border_container,
+        flexDirection:"row",
+        alignItems:"center"
+    },
+    option:{
+        flex:1,
+        padding:paddings.low,
+        borderColor:colors.border_container,
+        alignItems:"center",
+        gap:gaps.mid
+    },
+    option_title:{
+        fontFamily:fontfamily.first_family,
+        fontSize:fontsize.mid,
+        fontWeight:fontweight.very_high,
+        color:colors.text_text
+    },
+    option_value:{
+        fontFamily:fontfamily.first_family,
+        fontSize:fontsize.mid,
+        fontWeight:fontweight.mid,
+        color:colors.text_text
+    },
+    popup:{
+        width:"100%",
+        height:0,
+        padding:paddings.mid,
+        backgroundColor:colors.theme_container,
+        borderBottomLeftRadius:40,
+        borderBottomRightRadius:40,
+        alignItems:"center",
+        gap:gaps.super_high,
+        position:"absolute",
+        top:60 + paddings.mid + 1,
+        left:0,
+        zIndex:99999999999,
+        display:"none",
+        overflow:"hidden"
+    },
+    options_list:{
+        flex:1,
+        width:"100%",
+        flexDirection:"row",
+        justifyContent:"flex-start",
+        alignItems:"center",
+        flexWrap:"wrap",
+        columnGap:gaps.mid,
+        rowGap:gaps.high
+    },
+    item:{
+        width:(width - (2 * paddings.mid) - (2 * gaps.mid)) / 3,
+        padding:paddings.low,
+        borderRadius:8,
+        backgroundColor:colors.light_theme_container,
+        borderWidth:0,
+        borderColor:colors.border_container,
+        justifyContent:"center",
+        alignItems:"center"
+    },
+    voice:{
+        width:60,
+        height:60,
+        backgroundColor:colors.third_theme_container,
+        borderTopLeftRadius:12,
+        justifyContent:"center",
+        alignItems:"center",
+    },
+    stop:{
+        width:"50%",
+        height:"50%",
+        borderRadius:6,
+        backgroundColor:colors.dark_white_container
+    },
+    flatlist:{
+        padding:paddings.high,
+        paddingTop:paddings.super_high,
+        marginBottom:70,
+        zIndex:-1
+    },
+    card:{
+        width:width - (2 * paddings.high) - 50 - (width * 0.1),
+        marginBottom:margins.super_high,
+    },
+    bottom_space:{
+        marginBottom:"15%"
+    },
+    empty_container:{
+        flex:1,
+        justifyContent:"flex-start",
+        alignItems:"center",
+        zIndex:-1
+    },
+    empty:{
+        width:"80%",
+        padding:paddings.high,
+        backgroundColor:"#676767",
+        borderRadius:16,
+        marginTop:50
+    },
+    empty_text:{
+        fontFamily:fontfamily.first_family,
+        fontSize:fontsize.mid,
+        fontWeight:fontweight.mid,
+        color:colors.text_text
+    },
+    triangle:{
+        width:0,
+        height:0,
+        borderLeftWidth:15,
+        borderRightWidth:15,
+        borderBottomWidth:15,
+        borderLeftColor:'transparent',
+        borderRightColor:'transparent',
+        borderBottomColor:'#676767',
+        position:'absolute',
+        left:-15, 
+        bottom:10,
+    }
+});
+
+export default mobileStyle;

@@ -7,6 +7,7 @@ import SettingsIcon from "./SettingsIcon";
 import PlusIcon from "./PlusIcon";
 import DeleteIcon from "./DeleteIcon";
 import SaveIcon from "./SaveIcon";
+import SendIcon from "./SendIcon";
 import RightArrowIcon from "./RightArrowIcon";
 import ToolsIcon from "./ToolsIcon";
 import SoundIcon from "./SoundIcon";
@@ -22,8 +23,9 @@ export {
     PlusIcon,
     DeleteIcon,
     SaveIcon,
+    SendIcon,
     RightArrowIcon,
     ToolsIcon,
     SoundIcon,
-    MicrophoneIcon
+    MicrophoneIcon,
 };

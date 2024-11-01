@@ -33,7 +33,7 @@ const ReadAloud = async (text="", delay=1500) => {
             // Config
             Tts.setDefaultLanguage(LanguageConvertor[language]);                             
             //Tts.setDefaultVoice('com.apple.voice.compact.tr-TR.Yelda');     
-            Tts.setDefaultRate(0.3);                                      
+            Tts.setDefaultRate(0.4);                                      
             Tts.setDefaultPitch(1.2);                                     
             Tts.setDucking(true);                                           
             Tts.setIgnoreSilentSwitch("ignore");  
