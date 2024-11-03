@@ -35,3 +35,6 @@ Adından da anlaşılacağı üzere **InclusiveAi** projesi herkesi kapsayan bir
 
 ## İletişim
 [Mail](oguzhantorunoglu7@gmail.com)
+
+
+>**Not**: Ürün bir React Native projesidir. Hem android hem ios platformlarda çalışmaktadır.
