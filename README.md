@@ -28,13 +28,13 @@ Adından da anlaşılacağı üzere **InclusiveAi** projesi herkesi kapsayan bir
 * Tartışıyorum aracı eklenecek (Kullanıcı istediği ünlüyü seçip bir konuda tartışabilecek)
 * Meslekleri tanıyorum aracı eklenecek (ülkemizde ne yazıkki insanlar seçtikleri mesleklerin ne yaptıklarını bilmiyorlar)
 
+---
+>**Not**: Ürün bir React Native projesidir. Hem android hem ios platformlarda çalışmaktadır.
 
 ## Ürün Videosu
 [Link](https://www.youtube.com/watch?v=R3eTxk_8sdQ)
 
 
 ## İletişim
-[Mail](oguzhantorunoglu7@gmail.com)
-
-
->**Not**: Ürün bir React Native projesidir. Hem android hem ios platformlarda çalışmaktadır.
+[Mail](oguzhantorunoglu7@gmail.com)  
+[Linkedin](https://www.linkedin.com/in/oguzhantorunoglu/)
