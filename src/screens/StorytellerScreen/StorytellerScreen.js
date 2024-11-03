@@ -40,7 +40,7 @@ const StorytellerScreen = (props) => {
     const [loading, setLoading] = useState(false);
 
     const [languages] = useLanguage();
-    const [text, isListening, setIsListening] = useVoice();
+    const [text, isListening, setIsListening] = useVoice(false);
     const flatListRef = useRef(null);
     const animationValue = useRef(new Animated.Value(0)).current;
 

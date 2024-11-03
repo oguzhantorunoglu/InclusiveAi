@@ -1,79 +1,37 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+Adından da anlaşılacağı üzere **InclusiveAi** projesi herkesi kapsayan bir eğitim uygulamasıdır. Eğitim herkesin hakkıdır. Gözü gören veya görmeyen, kulağı duyan veya duymayan. Genç, çocuk veya yaşlı demeden herkes bilgiye ulaşabilmelidir. Hatta abartıyorum okuma yazma bilmeyen biri bile bilgiye ulaşabilmelidir. ✨✍️✨
 
-# Getting Started
+# Uygulamadan Görüntüler
+<p>
+  <img src="./assets/readme/storyteller.png" alt="Storyteller" width="200" />
+  <img src="./assets/readme/home.png" alt="StorytellerScreen" width="200" />
+  <img src="./assets/readme/myeyes.png" alt="StorytellerScreen" width="200" />
+  <img src="./assets/readme/myeyes2.png" alt="StorytellerScreen" width="200" />
+</p>
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
-## Step 1: Start the Metro Server
+>**Not**: Uygulama Hackathon 2024 için bireysel olarak geliştirdiğim bir projedir. Uygulamadaki varolan sayfalardan küçük bir kısmı henüz tamamlanamamıştır. Bunlara ek olarak uygulamaya ileride eklemek istediğim özellikler ve fikirler bulunmaktadır. Uygulamanın varolan özellikleri veya ileride eklenecek özellikleri için yazının devamında detaylı bilgi verilecektir.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## Uygulamanın Varolan Özellikleri
 
-To start Metro, run the following command from the _root_ of your React Native project:
+* 6 farklı dil desteği
+* Yapay zeka destekli sesli komutlar ile uygulamayı kullanabilme (Görme engelliler, Yaşlılar, Okuma Yazma bilmeyenler)
+* Özelleştirmeler yaparak bilgileri akılda kalıcı hikayelere çevirebilirsiniz (Yaş Kategorisi, Bilimsel Yaklaşım)
+* İşitme engelliler için kamera açık veya kapalıyken ders esnasında anlatılanları sanki bir film alt yazısı gibi telefonunuzda görebilirsiniz. 
+* Bu canlı yazıya çevirme işini yapay zeka desteğiyle özetlenmiş, dil bilgisi kurallarına uygun ve tekrarlardan arınmış hale getirebilirsiniz. (Kolay ders takibi için başarılı)
+* İnternet kontrolu izin kontrolü gibi konulara dikkat edilmiş ve bunlar içinde sayfalar hazırlanmıştır
 
-```bash
-# using npm
-npm start
+## Uygulamaya İleride Eklenmek İstenen Özellikler
+* Canlı sesi metne çevirme kısmına yapay zeka dil desteği eklenerek farklı dillerdeki sesler kendi dilimize çevrilebilir
+* Özetleyici aracı tamamlanmadı tamamlanabilir (Resim, pdf vs bunlar yapay zeka ile özetlenmiş dökümanlara dönüşerek hızlıcı öğrenme yapılabilir)
+* Robot sesler yerine daha doğal sesler eklenebilir
+* Konuşma engelliler için yapay zeka ile sesler üretip bunları sunum haline getirme eklenebilir bu şekilde konuşma engelli bir birey bile sınıf ortamında sunum yapabilir
+* Tartışıyorum aracı eklenecek (Kullanıcı istediği ünlüyü seçip bir konuda tartışabilecek)
+* Meslekleri tanıyorum aracı eklenecek (ülkemizde ne yazıkki insanlar seçtikleri mesleklerin ne yaptıklarını bilmiyorlar)
 
-# OR using Yarn
-yarn start
-```
 
-## Step 2: Start your Application
+## Ürün Videosu
+[Link](https://www.youtube.com/watch?v=R3eTxk_8sdQ)
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
 
-### For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## İletişim
+[Mail](oguzhantorunoglu7@gmail.com)

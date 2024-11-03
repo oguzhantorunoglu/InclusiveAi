@@ -72,7 +72,9 @@ const HomeScreen = (props) => {
     const getData = () => {
         // Fetch Api with Current Language
         setData(Data[0]);
-        setLoading(false);
+        setTimeout(() => {
+            setLoading(false);
+        }, 3000);
     };
 
 
