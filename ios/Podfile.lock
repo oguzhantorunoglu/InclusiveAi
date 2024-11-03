@@ -1673,6 +1673,12 @@ PODS:
   - SocketRocket (0.7.0)
   - TextToSpeech (4.1.1):
     - React-Core
+  - VisionCamera (4.6.0):
+    - VisionCamera/Core (= 4.6.0)
+    - VisionCamera/React (= 4.6.0)
+  - VisionCamera/Core (4.6.0)
+  - VisionCamera/React (4.6.0):
+    - React-Core
   - Yoga (0.0.0)
 
 DEPENDENCIES:
@@ -1753,6 +1759,7 @@ DEPENDENCIES:
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - TextToSpeech (from `../node_modules/react-native-tts`)
+  - VisionCamera (from `../node_modules/react-native-vision-camera`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -1912,6 +1919,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-svg"
   TextToSpeech:
     :path: "../node_modules/react-native-tts"
+  VisionCamera:
+    :path: "../node_modules/react-native-vision-camera"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -1993,6 +2002,7 @@ SPEC CHECKSUMS:
   RNSVG: 8b1a777d54096b8c2a0fd38fc9d5a454332bbb4d
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   TextToSpeech: 2b930ec3756afde499061f4f01ea895e1f75dccb
+  VisionCamera: 637b702faeb698fecdb29208068a189a10ea0ab5
   Yoga: 055f92ad73f8c8600a93f0e25ac0b2344c3b07e6
 
 PODFILE CHECKSUM: bd454631f54a9534141a7fe40ee3d56095d6a51e

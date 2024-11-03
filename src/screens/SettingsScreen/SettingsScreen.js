@@ -3,6 +3,7 @@ import { View, ScrollView, Text } from 'react-native';
 
 import { showMessage } from "react-native-flash-message";
 import AsyncStorage from "@react-native-async-storage/async-storage"; 
+import RNRestart from 'react-native-restart';
 
 import { Selectbox } from '../../components/others';
 import { useLanguage } from '../../hooks';
@@ -68,6 +69,7 @@ const SettingsScreen = () => {
         if(item?.key){
             await AsyncStorage.setItem('@language', item.key);
             reloadLanguage();
+            RNRestart.Restart();
         }
         else{
             showMessage({

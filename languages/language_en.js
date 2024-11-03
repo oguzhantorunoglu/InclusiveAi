@@ -70,4 +70,11 @@ export default language_en = {
     literature:"Literature",
     art:"Art",
     storyteller_empty_text:"You can listen to memorable stories about a subject you want to learn by making customisations suitable for yourself. Let's get started!",
+    dont_access_app_settings:"Unable to access the settings page.",
+    camera_permission_title:"Camera Permission Required",
+    camera_permission_description:"To switch on camera access, go to settings.",
+    microphone_permission_title:"Microphone Permission Required",
+    microphone_permission_description:"To switch on microphone access, go to settings.",
+    open_settings:"Open Settings",
+    coming_soon:"Coming Soon",
 };

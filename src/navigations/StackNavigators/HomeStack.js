@@ -3,7 +3,7 @@ import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { HomeScreen, SettingsScreen, StorytellerScreen } from "../../screens";
+import { HomeScreen, SettingsScreen, StorytellerScreen, MyEyesScreen, SummariserScreen } from "../../screens";
 import { Logo, SettingsIcon, LeftArrowIcon } from '../../../assets/icons';
 import { useLanguage } from '../../hooks';
 
@@ -83,6 +83,64 @@ const HomeStack = ({navigation}) => {
             <Stack.Screen 
                 name="StorytellerScreen" 
                 component={StorytellerScreen}
+                options={{   
+                    title:null,
+                    headerStyle:{shadowColor:'transparent', backgroundColor:colors.theme_container},
+                    headerTitleAlign:"center",
+                    cardStyle:{backgroundColor:colors.white_container},
+                    headerTitle:() => ( 
+                        <TouchableOpacity 
+                            style={styles.container}
+                            activeOpacity={0.9}
+                            onPress={goHomePage}
+                        >
+                            <Logo/>
+                        </TouchableOpacity>
+                    ),
+                    headerLeft:() => (
+                        <TouchableOpacity 
+                            style={styles.left_container}
+                            onPress={goBack}
+                        >
+                            <LeftArrowIcon stroke={colors.white_container} height={20} width={20} strokeWidth={2.5}/>
+                        </TouchableOpacity>
+                    )
+                }}
+            />
+
+
+            <Stack.Screen 
+                name="MyEyesScreen" 
+                component={MyEyesScreen}
+                options={{   
+                    title:null,
+                    headerStyle:{shadowColor:'transparent', backgroundColor:colors.theme_container},
+                    headerTitleAlign:"center",
+                    cardStyle:{backgroundColor:colors.white_container},
+                    headerTitle:() => ( 
+                        <TouchableOpacity 
+                            style={styles.container}
+                            activeOpacity={0.9}
+                            onPress={goHomePage}
+                        >
+                            <Logo/>
+                        </TouchableOpacity>
+                    ),
+                    headerLeft:() => (
+                        <TouchableOpacity 
+                            style={styles.left_container}
+                            onPress={goBack}
+                        >
+                            <LeftArrowIcon stroke={colors.white_container} height={20} width={20} strokeWidth={2.5}/>
+                        </TouchableOpacity>
+                    )
+                }}
+            />
+
+
+            <Stack.Screen 
+                name="SummariserScreen" 
+                component={SummariserScreen}
                 options={{   
                     title:null,
                     headerStyle:{shadowColor:'transparent', backgroundColor:colors.theme_container},

@@ -12,6 +12,12 @@ import RightArrowIcon from "./RightArrowIcon";
 import ToolsIcon from "./ToolsIcon";
 import SoundIcon from "./SoundIcon";
 import MicrophoneIcon from "./MicrophoneIcon";
+import SummarizerIcon from "./SummarizerIcon";
+import OpenCameraIcon from "./OpenCameraIcon";
+import CloseCameraIcon from "./CloseCameraIcon";
+import CameraIcon from "./CameraIcon";
+import FlashIcon from "./FlashIcon";
+import ThemeIcon from "./ThemeIcon";
 
 export {
     Logo,
@@ -28,4 +34,10 @@ export {
     ToolsIcon,
     SoundIcon,
     MicrophoneIcon,
+    SummarizerIcon,
+    OpenCameraIcon,
+    CloseCameraIcon,
+    CameraIcon,
+    FlashIcon,
+    ThemeIcon
 };

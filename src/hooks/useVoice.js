@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Platform, Vibration } from 'react-native';
 
 import { showMessage } from "react-native-flash-message";
@@ -18,11 +18,12 @@ const LanguageConvertor = {
 
 let debounceTimeout;
 
-const useVoice = () => {
-    const [text, setText] = useState(""); 
+const useVoice = (isContinuousListening = false) => {
+    const [text, setText] = useState("");  
     const [isListening, setIsListening] = useState(false);
 
     const [languages] = useLanguage();
+    const temporaryText = useRef('');
 
 
     const startListening = async () => {
@@ -129,12 +130,17 @@ const useVoice = () => {
 
     useEffect(() => {
         Voice.onSpeechResults = (response) => {  
-            clearTimeout(debounceTimeout);     
+            if(isContinuousListening){
+                temporaryText.current = response.value[0];
+            }
+            else{
+                clearTimeout(debounceTimeout);     
             
-            debounceTimeout = setTimeout(() => {
-                stopListening();
-                setText(response.value[0]);
-            }, 1500);
+                debounceTimeout = setTimeout(() => {
+                    stopListening();
+                    setText(response.value[0]);
+                }, 1500);
+            }
         };
         
         Voice.onSpeechError = (response) => {
@@ -148,10 +154,17 @@ const useVoice = () => {
                     icon:"warning", 
                 });  
             }
-        };        
+        };     
 
+        const interval = setInterval(() => {
+            if(isContinuousListening){
+                setText(temporaryText.current.trim().split(' ').slice(-100).join(' '));
+            }
+        }, 15000);
+          
         return () => {
-            Voice.destroy().then(Voice.removeAllListeners);     
+            Voice.destroy().then(Voice.removeAllListeners);   
+            clearInterval(interval);
         };
     }, []);
 

@@ -39,6 +39,8 @@
 	<string>This app requires access to the microphone for speech recognition.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>This app needs access to speech recognition for converting speech to text.</string>
+	<key>NSCameraUsageDescription</key>
+    <string>This application requires access to your camera to add visuals to voice translations.</string>
 
 
 	<key>UILaunchStoryboardName</key>
